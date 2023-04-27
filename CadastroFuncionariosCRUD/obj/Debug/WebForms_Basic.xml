@@ -37,18 +37,18 @@ CadastroFuncionariosCRUD
  Retorna o objeto de log Asp.
  </summary>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._grd">
+<member name="F:CadastroFuncionariosCRUD.Funcionarios._UpdatePanel1">
 <summary>
-Controle grd.
+Controle UpdatePanel1.
 </summary>
 <remarks>
 Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._updNovo">
+<member name="F:CadastroFuncionariosCRUD.Funcionarios._grd">
 <summary>
-Controle updNovo.
+Controle grd.
 </summary>
 <remarks>
 Campo gerado automaticamente.
@@ -118,18 +118,27 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._chkAtivo">
+<member name="F:CadastroFuncionariosCRUD.Funcionarios._ButtonAdd">
 <summary>
-Controle chkAtivo.
+Controle ButtonAdd.
 </summary>
 <remarks>
 Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._ButtonAdd">
+<member name="F:CadastroFuncionariosCRUD.Funcionarios._buttonCancelar">
 <summary>
-Controle ButtonAdd.
+Controle buttonCancelar.
+</summary>
+<remarks>
+Campo gerado automaticamente.
+Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+</remarks>
+</member>
+<member name="F:CadastroFuncionariosCRUD.SiteMaster._ScriptManager1">
+<summary>
+Controle ScriptManager1.
 </summary>
 <remarks>
 Campo gerado automaticamente.

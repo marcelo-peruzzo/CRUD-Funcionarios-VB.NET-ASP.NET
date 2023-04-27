@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Funcionarios
 
     '''<summary>
+    '''Controle UpdatePanel1.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''Controle grd.
     '''</summary>
     '''<remarks>
@@ -21,15 +30,6 @@ Partial Public Class Funcionarios
     '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
     '''</remarks>
     Protected WithEvents grd As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
-    '''Controle updNovo.
-    '''</summary>
-    '''<remarks>
-    '''Campo gerado automaticamente.
-    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-    '''</remarks>
-    Protected WithEvents updNovo As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
     '''Controle btnAdicionar.
@@ -95,15 +95,6 @@ Partial Public Class Funcionarios
     Protected WithEvents txtTelefone As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Controle chkAtivo.
-    '''</summary>
-    '''<remarks>
-    '''Campo gerado automaticamente.
-    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-    '''</remarks>
-    Protected WithEvents chkAtivo As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
     '''Controle ButtonAdd.
     '''</summary>
     '''<remarks>
@@ -111,4 +102,13 @@ Partial Public Class Funcionarios
     '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
     '''</remarks>
     Protected WithEvents ButtonAdd As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Controle buttonCancelar.
+    '''</summary>
+    '''<remarks>
+    '''Campo gerado automaticamente.
+    '''Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
+    '''</remarks>
+    Protected WithEvents buttonCancelar As Global.System.Web.UI.WebControls.Button
 End Class

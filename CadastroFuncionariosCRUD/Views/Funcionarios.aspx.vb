@@ -121,10 +121,15 @@ Public Class Funcionarios
         btnAdicionar.Visible = False
         btnAtualizar.Visible = True
         btnCancelar.Visible = True
+
         pessoas.Id = Integer.Parse(CType(sender, Button).CommandArgument)
         LoadDataEdit(pessoas.Id)
+        ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType(), "abrirModal", "$('#modalCadastro').modal('show');", True)
+
         Session("IdEditar") = pessoas.Id
+        buttonCancelar.Visible = False
     End Sub
+
 
     Protected Sub UpdatePeople(id As Integer)
         id = Convert.ToInt32(Session("IdEditar"))
