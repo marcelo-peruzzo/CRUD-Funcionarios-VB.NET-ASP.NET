@@ -42,13 +42,10 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView> 
-
-
                 <asp:Button ID="btnAdicionar" runat="server" Text="Adicionar" CssClass="btn btn-primary" />
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:Button ID="btnAtualizar" runat="server" Text="Atualizar" CssClass="btn btn-success" />
-    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger" />
+
 
     <%--MODAL PARA ABRIR FORMULARIO DE CADASTRO--%>
     <div class="modal fade" id="modalCadastro">
@@ -83,7 +80,7 @@
 
                     <div class="row">
                         <div class="col-6 d-flex d-flex justify-content-start">
-                            <asp:Button ID="ButtonAdd" runat="server" Text="Adicionar" CssClass="btn btn-primary" />
+                            <asp:Button ID="buttonAdd" runat="server" Text="Adicionar" CssClass="btn btn-primary" />
                         </div>
                         <div class="col-6 d-flex d-flex justify-content-start">
                             <asp:Button ID="buttonCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger" />

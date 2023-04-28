@@ -29,12 +29,10 @@ Public Class Funcionarios
         End If
     End Sub
 
-    'Metodo para carregar a GridView do arquivo Pessoas.aspx, com os dados inseridos na tebela do Banco
+    'Metodo para carregar a GridView do arquivo Funcionarios.aspx, com os dados inseridos na tebela do Banco
     Public Sub CarregaGrid()
         Dim query As String = "SELECT * FROM Funcionarios"
         Dim dt As New DataTable
-        btnAtualizar.Visible = False
-        btnCancelar.Visible = False
         Using connection As New SqlConnection(connectionString)
             Dim command As New SqlCommand(query, connection)
             Dim adapter As New SqlDataAdapter(command)
@@ -49,11 +47,7 @@ Public Class Funcionarios
             End Try
 
         End Using
-        'Passar campos vazios para toda vez que add/editar/cancelar, limpe os campos text
-        txtNome.Text = ""
-        txtDataNasc.Text = ""
-        txtEmail.Text = ""
-        txtTelefone.Text = ""
+
     End Sub
 
     'Metodo que cria uma nova pessoa ao preencher os campos Text e clicar no botão "Adicionar"
@@ -96,38 +90,25 @@ Public Class Funcionarios
         CreatePeople()
     End Sub
 
-    'Carrega os dados do banco para os campos text, quando é clicado no botão "Editar"
-    Public Sub LoadDataEdit(ByVal id As Integer)
-        Dim queryNome As String = "SELECT *FROM Funcionarios where ID = @id"
-        Using connection As New SqlConnection(connectionString)
-            Dim command As New SqlCommand(queryNome, connection)
-            command.Parameters.AddWithValue("@id", id)
-            Try
-                connection.Open()
-                Dim reader As SqlDataReader = command.ExecuteReader()
-                Dim lTextBox As New List(Of TextBox) From {txtNome, txtDataNasc, txtEmail, txtTelefone}
-                If reader.Read = True Then
-                    For Each textBox As TextBox In lTextBox
-                        textBox.Text = reader(textBox.ID.Replace("txt", "").ToString)
-                    Next
-                End If
-            Catch ex As Exception
-                Console.WriteLine(ex.Message)
-            End Try
-        End Using
-    End Sub
-
+    'método é responsável por abrir a modal e preencher os campos de entrada na modal com os dados da linha editada na GridView
     Protected Sub Btn_Editar(sender As Object, e As EventArgs)
-        btnAdicionar.Visible = False
-        btnAtualizar.Visible = True
-        btnCancelar.Visible = True
+        Dim btn As Button = CType(sender, Button) 'a função CType é usada para converter o objeto SENDER(que disparou o evento do btn_editar) em um objeto do tipo button, permitindo acesso as props e metodos do onjeto Button
+        Dim row As GridViewRow = CType(btn.NamingContainer, GridViewRow) 'a propriedade NamingContainer do objeto btn, obtem uma referencia do container pai do botão (neste caso, a linha da GridView que contém o botão) e o CType converte o objeto NamingContainer e um objeto do tipo GridViewRow
+        Dim rowIndex As Integer = row.RowIndex 'variavel para obter o indice da linha clicada na gridview
+        'cada prorpiedade do objeto pessoas, recebe o indice da linha da gridview qual foi cliacada para editar.
+        pessoas.Nome = grd.Rows(rowIndex).Cells(0).Text
+        pessoas.DataNasc = grd.Rows(rowIndex).Cells(1).Text
+        pessoas.Email = grd.Rows(rowIndex).Cells(2).Text
+        pessoas.Telefone = grd.Rows(rowIndex).Cells(3).Text
+        'script jQuery para definir os valores dos campos de entrada na modal com os dados da linha selecionada e abrir a modal.
+        Dim script As String = "$('#MainContent_txtNome').val('" & pessoas.Nome & "');"
+        script &= "$('#MainContent_txtDataNasc').val('" & pessoas.DataNasc & "');"
+        script &= "$('#MainContent_txtEmail').val('" & pessoas.Email & "');"
+        script &= "$('#MainContent_txtTelefone').val('" & pessoas.Telefone & "');"
+        script &= "$('#modalCadastro').modal('show');"
 
-        pessoas.Id = Integer.Parse(CType(sender, Button).CommandArgument)
-        LoadDataEdit(pessoas.Id)
-        ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType(), "abrirModal", "$('#modalCadastro').modal('show');", True)
-
-        Session("IdEditar") = pessoas.Id
-        buttonCancelar.Visible = False
+        'abrindo a modal com jquery
+        'ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType(), "abrirModal", script, True)
     End Sub
 
 
@@ -187,18 +168,6 @@ Public Class Funcionarios
             End Try
 
         End Using
-    End Sub
-
-    Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
-        btnAdicionar.Visible = True
-        CarregaGrid()
-    End Sub
-
-    Private Sub btnAtualizar_Click(sender As Object, e As EventArgs) Handles btnAtualizar.Click
-        UpdatePeople(pessoas.Id)
-        Session.Remove("IdEditar")
-        btnAdicionar.Visible = True
-        CarregaGrid()
     End Sub
 
 End Class

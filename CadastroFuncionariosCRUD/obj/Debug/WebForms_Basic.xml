@@ -64,24 +64,6 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._btnAtualizar">
-<summary>
-Controle btnAtualizar.
-</summary>
-<remarks>
-Campo gerado automaticamente.
-Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-</remarks>
-</member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._btnCancelar">
-<summary>
-Controle btnCancelar.
-</summary>
-<remarks>
-Campo gerado automaticamente.
-Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-</remarks>
-</member>
 <member name="F:CadastroFuncionariosCRUD.Funcionarios._txtNome">
 <summary>
 Controle txtNome.
@@ -118,9 +100,9 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._ButtonAdd">
+<member name="F:CadastroFuncionariosCRUD.Funcionarios._buttonAdd">
 <summary>
-Controle ButtonAdd.
+Controle buttonAdd.
 </summary>
 <remarks>
 Campo gerado automaticamente.
