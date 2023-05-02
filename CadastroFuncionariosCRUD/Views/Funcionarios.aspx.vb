@@ -53,7 +53,7 @@ Public Class Funcionarios
     'Metodo que cria uma nova pessoa ao preencher os campos Text e clicar no botão "Adicionar"
     Public Sub CreatePeople()
         pessoas.Nome = txtNome.Text.Trim()
-        pessoas.DataNasc = DateTime.Parse(txtDataNasc.Text)
+        pessoas.DataNasc = txtDataNasc.Text
         pessoas.Email = txtEmail.Text.Trim()
         pessoas.Telefone = txtTelefone.Text.Trim()
 
@@ -61,7 +61,7 @@ Public Class Funcionarios
         Using connection As New SqlConnection(connectionString)
             Dim command As New SqlCommand(query, connection)
             command.Parameters.AddWithValue("@Nome", pessoas.Nome)
-            command.Parameters.AddWithValue("@Data", pessoas.DataNasc)
+            command.Parameters.AddWithValue("@Data", pessoas.DataNasc.Date)
             command.Parameters.AddWithValue("@Email", pessoas.Email)
             command.Parameters.AddWithValue("@Telefone", pessoas.Telefone)
             Try
@@ -102,28 +102,27 @@ Public Class Funcionarios
         pessoas.Telefone = grd.Rows(rowIndex).Cells(3).Text
         'script jQuery para definir os valores dos campos de entrada na modal com os dados da linha selecionada e abrir a modal.
         Dim script As String = "$('#MainContent_txtNome').val('" & pessoas.Nome & "');"
-        script &= "$('#MainContent_txtDataNasc').val('" & pessoas.DataNasc & "');"
+        script &= "$('#MainContent_txtDataNasc').val('" & Date.Parse(pessoas.DataNasc).ToString("yyyy-MM-dd") & "');"
         script &= "$('#MainContent_txtEmail').val('" & pessoas.Email & "');"
         script &= "$('#MainContent_txtTelefone').val('" & pessoas.Telefone & "');"
-        script &= "$('#modalCadastro').modal('show');"
+        script &= "$('#MainContent_buttonAdd').val('Atualizar');"
+        script &= "$('#modalCadastro').modal('show');" 'abrir a modal com o click do btn editar
 
-        'abrindo a modal com jquery
-        'ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType(), "abrirModal", script, True)
+        'método estático RegisterClientScriptBlock da classe ScriptManager para registrar o script jQuery na página. Isso fará com que o script seja executado pelo navegador quando a página for renderizada preenchendo os campos da modal.
+        ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType(), "abrirModal", script, True)
     End Sub
 
 
-    Protected Sub UpdatePeople(id As Integer)
-        id = Convert.ToInt32(Session("IdEditar"))
+    Public Sub UpdatePeople(ByVal id As Integer)
         pessoas.Nome = txtNome.Text.Trim()
         pessoas.DataNasc = DateTime.Parse(txtDataNasc.Text)
         pessoas.Email = txtEmail.Text.Trim()
         pessoas.Telefone = txtTelefone.Text.Trim()
-        Dim queryUpdate As String = "UPDATE Funcionarios SET NOME = @Nome, DATA = @Data, EMAIL = @Email, TELEFONE = @Telefone WHERE ID = @ID"
+        Dim queryUpdate As String = "UPDATE Funcionarios SET nome = @Nome, dataNascimento = @Data, email = @Email, telefone = @Telefone WHERE ID = @ID"
         Using connection As New SqlConnection(connectionString)
             Try
                 connection.Open()
                 Dim commandUpdate As New SqlCommand(queryUpdate, connection)
-                commandUpdate.Parameters.AddWithValue("@ID", id)
                 commandUpdate.Parameters.AddWithValue("@Nome", pessoas.Nome)
                 commandUpdate.Parameters.AddWithValue("@Data", pessoas.DataNasc)
                 commandUpdate.Parameters.AddWithValue("@Email", pessoas.Email)

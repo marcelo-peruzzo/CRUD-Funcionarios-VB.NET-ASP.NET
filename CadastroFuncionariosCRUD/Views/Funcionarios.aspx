@@ -24,6 +24,16 @@
                 'success'
             )
         }
+        //Limpar campos modal quando for fechada após o click do botao "editar"
+        $(document).ready(function () {
+            $('#modalCadastro').on('hidden.bs.modal', function LimpaModal () {
+                $('#MainContent_txtNome').val('');
+                $('#MainContent_txtDataNasc').val('');
+                $('#MainContent_txtEmail').val('');
+                $('#MainContent_txtTelefone').val('');
+                $('#MainContent_buttonAdd').val('Adicionar');
+            });
+        });
 
     </script>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -31,7 +41,7 @@
             <asp:GridView ID="grd" AutoGenerateColumns="false" runat="server" CssClass="table table-striped" DataKeyNames="ID">
                 <Columns>
                     <asp:BoundField DataField="nome" HeaderText="Nome" />
-                    <asp:BoundField DataField="dataNascimento" HeaderText="Data de Nascimento" />
+                    <asp:BoundField DataField="dataNascimento" HeaderText="Data de Nascimento"  DataFormatString="{0:dd/MM/yyyy}" />
                     <asp:BoundField DataField="email" HeaderText="Email" />
                     <asp:BoundField DataField="telefone" HeaderText="Telefone" />
                     <asp:TemplateField HeaderText="Opções">
@@ -54,7 +64,7 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Cadastro</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
                 </div>
 
                 <div class="modal-body">
