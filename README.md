@@ -1,7 +1,19 @@
 # CRUD-Funcionarios-VB.NET-ASP.NET
 
-### Imagem do projeto
+### SOBRE O PROJETO:
+<p>Seria basicamente CRUD (Create, Read, Update, Delete) para cadastrar Funcionarios</p>
+<p>Foi desenvolvido com as seguintes tecnologias:</p>
+<li>HTML</li>
+<li>CSS</li>
+<li>BOOTSTRAP-5.2</li>
+<li>SWEETALERT</li>
+<li>JAVASCRIPT</li>
+<li>JQUERY</li>
+<li>VB.NET</li>
+<li>ASP.NET</li>
+<p>Banco de dados utilizado: SQL SERVER</p>
 
+## Imagem do projeto:
 ![image](https://user-images.githubusercontent.com/39166422/235807298-cd9db46b-b54d-429a-8e97-7034b841d167.png)
 
 
