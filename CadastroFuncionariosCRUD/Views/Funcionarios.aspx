@@ -6,7 +6,7 @@
         function showSuccessAlert() {
             Swal.fire(
                 'Sucesso!',
-                'Pessoa cadastrada com sucesso!',
+                'Funcionario cadastrado com sucesso!',
                 'success'
             )
         }
@@ -20,20 +20,36 @@
         function showEditSuccessAlert() {
             Swal.fire(
                 'Sucesso!',
-                'Pessoa editada com sucesso!',
+                'Funcionario editado com sucesso!',
                 'success'
             )
         }
+
         //Limpar campos modal quando for fechada após o click do botao "editar"
-        $(document).ready(function () {
+        $(document).ready(function LimpaModal () {
             $('#modalCadastro').on('hidden.bs.modal', function LimpaModal () {
                 $('#MainContent_txtNome').val('');
                 $('#MainContent_txtDataNasc').val('');
                 $('#MainContent_txtEmail').val('');
-                $('#MainContent_txtTelefone').val('');
+                $('#MainContent_txtTelefone').val('');               
                 $('#MainContent_buttonAdd').val('Adicionar');
             });
         });
+
+        $(document).ready(function () {
+            // Aplica a máscara ao campo txtTelefone
+            $('#MainContent_txtTelefone').mask('(00) 00000-0000');
+        });
+
+        function validateForm() {
+            var nome = document.getElementById('<%= txtNome.ClientID %>').value;
+                var dataNasc = document.getElementById('<%= txtDataNasc.ClientID %>').value;
+                if (nome == "" || dataNasc == "") {
+                    alert("Os campos Nome e Data Nascimento são obrigatórios.");
+                    return false;
+                }
+                return true;
+            }
 
     </script>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -64,13 +80,13 @@
 
                 <div class="modal-header">
                     <h4 class="modal-title">Cadastro</h4>
-                    <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn btn-danger" data-bs-dismiss="modal" data-dismiss="modal">&times;</button>
                 </div>
 
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nome:</label>
-                        <asp:TextBox ID="txtNome" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtNome" runat="server" CssClass="form-control"></asp:TextBox>                       
                     </div>
                     <div class="form-group">
                         <label>Data Nascimento:</label>
@@ -82,18 +98,15 @@
                     </div>
                     <div class="form-group">
                         <label>Telefone:</label>
-                        <asp:TextBox ID="txtTelefone" runat="server" TextMode="Number" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txtTelefone" runat="server" TextMode="SingleLine" CssClass="form-control"></asp:TextBox>
                     </div>
-<%--                    <div class="form-group my-2">
-                        <asp:CheckBox ID="chkAtivo" runat="server" Text="Ativo" />
-                    </div>--%>
 
                     <div class="row">
-                        <div class="col-6 d-flex d-flex justify-content-start">
-                            <asp:Button ID="buttonAdd" runat="server" Text="Adicionar" CssClass="btn btn-primary" />
+                        <div class="col-6 d-flex mt-3 d-flex justify-content-start">
+                            <asp:Button ID="buttonAdd" runat="server" Text="Adicionar" CssClass="btn btn-primary" OnClientClick="return validateForm();" />
                         </div>
-                        <div class="col-6 d-flex d-flex justify-content-start">
-                            <asp:Button ID="buttonCancelar" runat="server" Text="Cancelar" CssClass="btn btn-danger" />
+                        <div  class="col-6 d-flex mt-3 d-flex justify-content-end">
+                            <button type="button" id="buttonCancelar" data-bs-dismiss="modal" class="btn btn-danger">Cancelar</button>
                         </div>
                     </div>
                 </div>

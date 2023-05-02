@@ -3,13 +3,13 @@
 
 Public Class Funcionarios
     Inherits System.Web.UI.Page
-
     'Instanciando a conexão do banco, recebendo os dados da ConnectionStrings no arquivo Web.config
     Private Shared ReadOnly connectionString As String = ConfigurationManager.ConnectionStrings("BDCrudVb").ConnectionString
     'Instanciando um novo objeto Pessoas, da classe Pessoas.vb com seus metodos
     Dim pessoas As New Pessoa()
     Dim updateId As Integer
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         If Not Page.IsPostBack Then
             CarregaGrid()
             If Session("showAlertAdd") IsNot Nothing AndAlso Session("showAlertAdd").ToString() = "True" Then
@@ -83,11 +83,20 @@ Public Class Funcionarios
     'Metodo que trata o Evento do botão "Adicionar" e aciona o metodo "CreatePeople()"
     'para gerar uma nova pessoa, e chama o metodo CarregaGrid() para listar o novos dados na GridView
     Private Sub ButtonGridAdicionar_Click(sender As Object, e As EventArgs) Handles btnAdicionar.Click
+        'Remove as variaveis de sessão instanciadas no metodo Btn_Editar, para cair como falso no Else do metodo ButtonModal_Click
+        Session.Remove("IdEditar")
+        Session.Remove("isEditing")
         ScriptManager.RegisterStartupScript(Me.Page, Me.GetType(), "abrirModal", "$('#modalCadastro').modal('show');", True)
+        'CarregaGrid()
     End Sub
 
-    Private Sub ButtonModal_Click(sender As Object, e As EventArgs) Handles ButtonAdd.Click
-        CreatePeople()
+    Private Sub ButtonModal_Click(sender As Object, e As EventArgs) Handles buttonAdd.Click
+        If Session("isEditing") IsNot Nothing AndAlso Session("isEditing").ToString() = "True" Then
+            Dim id As Integer = Convert.ToInt32(Session("IdEditar"))
+            UpdatePeople(id)
+        Else
+            CreatePeople()
+        End If
     End Sub
 
     'método é responsável por abrir a modal e preencher os campos de entrada na modal com os dados da linha editada na GridView
@@ -110,6 +119,9 @@ Public Class Funcionarios
 
         'método estático RegisterClientScriptBlock da classe ScriptManager para registrar o script jQuery na página. Isso fará com que o script seja executado pelo navegador quando a página for renderizada preenchendo os campos da modal.
         ScriptManager.RegisterClientScriptBlock(Me.Page, Me.GetType(), "abrirModal", script, True)
+        pessoas.Id = grd.DataKeys(rowIndex).Value
+        Session("IdEditar") = pessoas.Id
+        Session("isEditing") = True
     End Sub
 
 
@@ -118,11 +130,12 @@ Public Class Funcionarios
         pessoas.DataNasc = DateTime.Parse(txtDataNasc.Text)
         pessoas.Email = txtEmail.Text.Trim()
         pessoas.Telefone = txtTelefone.Text.Trim()
-        Dim queryUpdate As String = "UPDATE Funcionarios SET nome = @Nome, dataNascimento = @Data, email = @Email, telefone = @Telefone WHERE ID = @ID"
+        Dim queryUpdate As String = "UPDATE Funcionarios SET nome = @Nome, dataNascimento = @Data, email = @Email, telefone = @Telefone WHERE id = @id"
         Using connection As New SqlConnection(connectionString)
             Try
                 connection.Open()
                 Dim commandUpdate As New SqlCommand(queryUpdate, connection)
+                commandUpdate.Parameters.AddWithValue("@id", id)
                 commandUpdate.Parameters.AddWithValue("@Nome", pessoas.Nome)
                 commandUpdate.Parameters.AddWithValue("@Data", pessoas.DataNasc)
                 commandUpdate.Parameters.AddWithValue("@Email", pessoas.Email)

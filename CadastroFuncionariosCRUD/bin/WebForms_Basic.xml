@@ -109,15 +109,6 @@ Campo gerado automaticamente.
 Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
 </remarks>
 </member>
-<member name="F:CadastroFuncionariosCRUD.Funcionarios._buttonCancelar">
-<summary>
-Controle buttonCancelar.
-</summary>
-<remarks>
-Campo gerado automaticamente.
-Modificar a declaração do campo de movimento do arquivo de designer para o arquivo code-behind.
-</remarks>
-</member>
 <member name="F:CadastroFuncionariosCRUD.SiteMaster._ScriptManager1">
 <summary>
 Controle ScriptManager1.
